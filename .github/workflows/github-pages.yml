@@ -21,12 +21,7 @@ jobs:
         requirements_path: ./docs/source/requirements.txt
     - name: Where am i 
       run: |
-        pwd
-        touch .nojekyll
-        ls -al 
-        git status
-        git add .
-        git commit -m "adding .nojekyll"
+        touch .nojekyll && git add . && git commit -m "adding .nojekyll" || true
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
