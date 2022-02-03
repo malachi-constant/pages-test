@@ -20,10 +20,10 @@ jobs:
         documentation_path: ./docs/source
         requirements_path: ./docs/source/requirements.txt
     - name: Where am i 
-        run: |
-          pwd
-          ls -al 
-          touch .nojekyll
+      run: |
+        pwd
+        ls -al 
+        touch .nojekyll
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
