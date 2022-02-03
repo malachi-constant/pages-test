@@ -11,7 +11,7 @@ jobs:
     - name: Setup python
       uses: actions/setup-python@v2
     - name: Checkout
-      uses: actions/checkout@main
+      uses: actions/checkout@master
       with:
         fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
     - name: Build and Commit
@@ -20,7 +20,7 @@ jobs:
         documentation_path: ./docs/source
         requirements_path: ./docs/source/requirements.txt
     - name: Push changes
-      uses: ad-m/github-push-action@main
+      uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: gh-pages
