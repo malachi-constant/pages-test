@@ -22,8 +22,8 @@ jobs:
     - name: Where am i 
       run: |
         pwd
-        ls -al 
         touch .nojekyll
+        ls -al 
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
