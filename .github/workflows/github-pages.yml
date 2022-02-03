@@ -25,7 +25,7 @@ jobs:
         touch .nojekyll
         ls -al 
         git status
-        git add .nojekyll
+        git add .
         git commit -m "adding .nojekyll"
     - name: Push changes
       uses: ad-m/github-push-action@master
