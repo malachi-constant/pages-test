@@ -19,7 +19,7 @@ jobs:
       with:
         documentation_path: ./docs/source
         requirements_path: ./docs/source/requirements.txt
-    - name: Where am i 
+    - name: Add No Jekyll Files
       run: |
         touch .nojekyll && git add . && git commit -m "adding .nojekyll" || true
     - name: Push changes
