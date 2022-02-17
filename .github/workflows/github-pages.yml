@@ -1,4 +1,4 @@
-name: Publish Github Page
+name: Publish Github Page (not used)
 on:
   push:
     branches: [none]

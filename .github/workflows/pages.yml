@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Github Pages Update
 on:
   push:
       branches: [main]

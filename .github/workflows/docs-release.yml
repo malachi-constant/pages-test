@@ -1,4 +1,4 @@
-name: Documentation Release
+name: Documentation Version Release
 on:
   push:
     tags:        
