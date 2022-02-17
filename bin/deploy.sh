@@ -18,7 +18,7 @@ cat >releases/${version}/index.html <<EOL
 EOL
 
 sed -i -e '\@</body>@i\
-<a href='"releases/${version}/index.html"'>'${version}'</a>' index.html
+<a href="releases/'${version}'/index.html">'${version}'</a>' index.html
 
 #
 
