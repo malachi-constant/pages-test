@@ -1,7 +1,7 @@
 name: Publish Github Page
 on:
   push:
-    branches: [main]
+    branches: [none]
 
 jobs:
   gh-pages:
