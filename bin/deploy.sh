@@ -17,3 +17,8 @@ cat >releases/${version}/index.html <<EOL
 </html> 
 EOL
 
+sed -i -e '\@</body>@i\
+<a href='"releases/${version}/index.html"'>'${version}'</a>' index.html
+
+#
+
