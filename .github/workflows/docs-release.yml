@@ -3,20 +3,44 @@ on:
   push:
     tags:        
       - '*.*.*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version of documentation to generate and release, x.y.z'     
+        required: true
 jobs:
   docs-release:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v2
+      - name: Setup python
+        uses: actions/setup-python@v2
       - name: Set Version ➕
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-      - name: Release 🌱
         run: |
-          cd docs
-          ./bin/deploy.sh $RELEASE_VERSION
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.2.5
+          if [ -z ${{ github.event.inputs.version }} ]; then echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV; else echo "RELEASE_VERSION=${{ github.event.inputs.version }}" >> $GITHUB_ENV; fi
+      - name: Install Requirements
+        run: |
+          pip install pyyaml
+      - uses: jannekem/run-python-script-action@v1
         with:
-          branch: gh-pages
-          folder: docs 
+          script: |
+            from yaml import YAMLError, dump, safe_load
+
+            file = "versions.yaml"
+            version = $RELEASE_VERSION
+            with open(file, "r") as stream:
+                try:
+                    content = safe_load(stream)
+                except YAMLError as exc:
+                    print(exc)
+
+            if "stable" in [entry["name"] for entry in content]:
+                print(f"setting stable version to: '{version}'")
+                for i in range(len(content)):
+                    if content[i]["name"] == "stable":
+                        content[i]["root"] = version
+            else:
+                print(f"no stable version present in configuration; adding {version} as stable")
+                content.append({"name": "stable", "root": version})
+
+            with open(file, "w") as output:
+                dump(content, output)
