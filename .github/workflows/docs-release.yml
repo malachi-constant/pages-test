@@ -20,6 +20,7 @@ jobs:
       - name: Install Requirements
         run: |
           pip install pyyaml
+          ls -al
       - uses: jannekem/run-python-script-action@v1
         with:
           script: |
