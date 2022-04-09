@@ -23,10 +23,12 @@ jobs:
       - uses: jannekem/run-python-script-action@v1
         with:
           script: |
+            import os 
+
             from yaml import YAMLError, dump, safe_load
 
             file = "versions.yaml"
-            version = $RELEASE_VERSION
+            version = os.environ.get("RELEASE_VERSION")
             with open(file, "r") as stream:
                 try:
                     content = safe_load(stream)
